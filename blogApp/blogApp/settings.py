@@ -13,15 +13,18 @@ from datetime import timedelta
 import os
 from pathlib import Path
 import psycopg2
+from dotenv import load_dotenv
+
+load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+# from decouple import config
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-9m0jbjra93!tf!(a#lw(_bz#4u02_+*n1-yk*&1&cnw+$c9lj!'
+SECRET_KEY = os.environ.get('BlOG_APP_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -96,35 +99,38 @@ WSGI_APPLICATION = 'blogApp.wsgi.application'
 #    }
 # }
 
-import os
+
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('NAME'),
-        'USER': os.environ.get('USER'),
-        'PASSWORD': os.environ.get('PASSWORD'),
-        'HOST': os.environ.get('HOST'),
-        'PORT': os.environ.get('PORT'),
+        'NAME': os.environ.get('DATABASE_NAME'),
+        'USER': os.environ.get('DATABASE_USER'),
+        'PASSWORD': os.environ.get('DATABASE_PASSWORD'),
+        'HOST': os.environ.get('DATABASE_HOST'),
+        'PORT': os.environ.get('DATABASE_PORT'),
     }
 }
-try:
-    # Creating a connection
-    connection = psycopg2.connect(
-        database=DATABASES['default']['NAME'],
-        user=DATABASES['default']['USER'],
-        password=DATABASES['default']['PASSWORD'],
-        host=DATABASES['default']['HOST'],
-        port=DATABASES['default']['PORT'],
-    )
+# try:
+#     # Creating a connection
+#     connection = psycopg2.connect(
+#         database=DATABASES['default']['NAME'],
+#         user=DATABASES['default']['USER'],
+#         password=DATABASES['default']['PASSWORD'],
+#         host=DATABASES['default']['HOST'],
+#         port=DATABASES['default']['PORT'],
+#     )
 
-    print("Database connection successful!")
+#     print("Database connection successful!")
 
-    # Close the connection
-    connection.close()
+#     # Close the connection
+#     connection.close()
 
-except Exception as e:
-    print(f"Database connection failed: {e}")
+# except Exception as e:
+#     print('env data=====================', os.environ.get('NAME'))
+#     print('db name===============', DATABASES['default']['NAME'])
+#     print('email host>>>>>>>>>>>>>>>>>>>>>>>>>>>>', os.environ.get('EMAIL_HOST_USER'))
+#     print(f"Database connection failed: {e}")
 
 
 
@@ -192,13 +198,13 @@ AUTH_USER_MODEL = 'signup.CustomUser'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
-from decouple import config
+# from decouple import config
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = config('EMAIL_HOST')
-EMAIL_PORT = config('EMAIL_PORT', default=587, cast=int)
-EMAIL_HOST_USER = config('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+EMAIL_HOST = os.environ.get('EMAIL_HOST')
+EMAIL_PORT = os.environ.get('EMAIL_PORT')
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 DEFAULT_FROM_EMAIL='areej.sherazi@zweidevs.com'
 EMAIL_USE_TLS = True
 SITE_ID = 1
