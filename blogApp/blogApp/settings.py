@@ -10,7 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 from datetime import timedelta
-
+import os
 from pathlib import Path
 import psycopg2
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -25,6 +25,7 @@ SECRET_KEY = 'django-insecure-9m0jbjra93!tf!(a#lw(_bz#4u02_+*n1-yk*&1&cnw+$c9lj!
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+
 
 ALLOWED_HOSTS = ["*"]
 CSRF_TRUSTED_ORIGINS = []
@@ -84,17 +85,29 @@ WSGI_APPLICATION = 'blogApp.wsgi.application'
 
 
 
-DATABASES = {
-   'default': {
-       'ENGINE': 'django.db.backends.postgresql',
-       'NAME': "blogApp_db",
-       'USER':'postgres',
-       'PASSWORD': 'password',
-       'HOST': 'localhost',
-       'PORT': '5432',
-   }
-}
+# DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.postgresql',
+#        'NAME': "blogApp_db",
+#        'USER':'postgres',
+#        'PASSWORD': 'password',
+#        'HOST': 'localhost',
+#        'PORT': '5432',
+#    }
+# }
 
+import os
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.environ.get('NAME'),
+        'USER': os.environ.get('USER'),
+        'PASSWORD': os.environ.get('PASSWORD'),
+        'HOST': os.environ.get('HOST'),
+        'PORT': os.environ.get('PORT'),
+    }
+}
 try:
     # Creating a connection
     connection = psycopg2.connect(
@@ -229,3 +242,5 @@ SIMPLE_JWT = {
     'SLIDING_TOKEN_LIFETIME': timedelta(minutes=60),
     'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
 }
+
+
