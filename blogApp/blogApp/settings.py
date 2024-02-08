@@ -88,19 +88,6 @@ WSGI_APPLICATION = 'blogApp.wsgi.application'
 
 
 
-# DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.postgresql',
-#        'NAME': "blogApp_db",
-#        'USER':'postgres',
-#        'PASSWORD': 'password',
-#        'HOST': 'localhost',
-#        'PORT': '5432',
-#    }
-# }
-
-
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -127,8 +114,7 @@ DATABASES = {
 #     connection.close()
 
 # except Exception as e:
-#     print('env data=====================', os.environ.get('NAME'))
-#     print('db name===============', DATABASES['default']['NAME'])
+#     print('env data=====================', os.environ.get('DATABASE_NAME'))
 #     print('email host>>>>>>>>>>>>>>>>>>>>>>>>>>>>', os.environ.get('EMAIL_HOST_USER'))
 #     print(f"Database connection failed: {e}")
 
