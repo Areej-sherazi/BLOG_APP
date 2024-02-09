@@ -87,6 +87,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'blogApp.wsgi.application'
 
 
+print('email host>>>>>>>>>>>>>>>>>>>>>>>>>>>>', os.environ.get('EMAIL_HOST_USER'))
 
 DATABASES = {
     'default': {
@@ -98,25 +99,25 @@ DATABASES = {
         'PORT': os.environ.get('DATABASE_PORT'),
     }
 }
-# try:
-#     # Creating a connection
-#     connection = psycopg2.connect(
-#         database=DATABASES['default']['NAME'],
-#         user=DATABASES['default']['USER'],
-#         password=DATABASES['default']['PASSWORD'],
-#         host=DATABASES['default']['HOST'],
-#         port=DATABASES['default']['PORT'],
-#     )
+try:
+    # Creating a connection
+    connection = psycopg2.connect(
+        database=DATABASES['default']['NAME'],
+        user=DATABASES['default']['USER'],
+        password=DATABASES['default']['PASSWORD'],
+        host=DATABASES['default']['HOST'],
+        port=DATABASES['default']['PORT'],
+    )
 
-#     print("Database connection successful!")
+    print("Database connection successful!")
 
-#     # Close the connection
-#     connection.close()
+    # Close the connection
+    connection.close()
 
-# except Exception as e:
-#     print('env data=====================', os.environ.get('DATABASE_NAME'))
-#     print('email host>>>>>>>>>>>>>>>>>>>>>>>>>>>>', os.environ.get('EMAIL_HOST_USER'))
-#     print(f"Database connection failed: {e}")
+except Exception as e:
+    print('env data=====================', os.environ.get('DATABASE_NAME'))
+    print('email host>>>>>>>>>>>>>>>>>>>>>>>>>>>>', os.environ.get('EMAIL_HOST_USER'))
+    print(f"Database connection failed: {e}")
 
 
 
