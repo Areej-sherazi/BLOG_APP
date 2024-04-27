@@ -169,19 +169,19 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # # settings.py
 
 
-DJOSER = {
-    'SERIALIZERS': {
-        'user_create': 'signup.serializers.CustomUserCreateSerializer',
-        'user': 'signup.serializers.CustomUserSerializer',
-    },
-    'SEND_ACTIVATION_EMAIL': True,
-    'SEND_CONFIRMATION_EMAIL':True,
-    'PASSWORD_RESET_CONFIRM_URL': 'password/reset/confirm/{uid}/{token}',
-    'USERNAME_RESET_CONFIRM_URL': 'username/reset/confirm/{uid}/{token}',
-    'ACTIVATION_URL': 'activate/{uid}/{token}',
-    'PASSWORD_RESET_CONFIRM_RETYPE': True,
+# DJOSER = {
+#     'SERIALIZERS': {
+#         'user_create': 'signup.serializers.CustomUserCreateSerializer',
+#         'user': 'signup.serializers.CustomUserSerializer',
+#     },
+#     'SEND_ACTIVATION_EMAIL': True,
+#     'SEND_CONFIRMATION_EMAIL':True,
+#     'PASSWORD_RESET_CONFIRM_URL': 'password/reset/confirm/{uid}/{token}',
+#     'USERNAME_RESET_CONFIRM_URL': 'username/reset/confirm/{uid}/{token}',
+#     'ACTIVATION_URL': 'activate/{uid}/{token}',
+#     'PASSWORD_RESET_CONFIRM_RETYPE': True,
 
-}
+# }
 
 AUTH_USER_MODEL = 'signup.CustomUser'
 
@@ -190,20 +190,30 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 # from decouple import config
 
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = os.environ.get('EMAIL_HOST')
+# EMAIL_PORT = os.environ.get('EMAIL_PORT')
+# EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+# EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+# DEFAULT_FROM_EMAIL='areej.sherazi@zweidevs.com'
+# EMAIL_USE_TLS = True
+# SITE_ID = 1
+
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = os.environ.get('EMAIL_HOST')
-EMAIL_PORT = os.environ.get('EMAIL_PORT')
-EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_PORT = 587
+EMAIL_HOST_USER = "areej.sherazi@zweidevs.com"
+EMAIL_HOST_PASSWORD = "ihzkebdexqvgidmb"
 DEFAULT_FROM_EMAIL='areej.sherazi@zweidevs.com'
 EMAIL_USE_TLS = True
-SITE_ID = 1
+EMAIL_USE_SSL = False
+# SITE_ID = 1
 
-
-AUTHENTICATION_BACKENDS = [
-    'django.contrib.auth.backends.ModelBackend',
-    'signup.authentication.CustomEmailBackend'
-]
+# AUTHENTICATION_BACKENDS = [
+#     'django.contrib.auth.backends.ModelBackend',
+#     'signup.authentication.CustomEmailBackend'
+# ]
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
